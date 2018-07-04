@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="https://shenmu.gitee.io/vue-best-pratice/vue.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="">
+      </head>
+      <body>
+        <div id="demo"></div>
+      </body>
+      <script type="text/javascript">
+        const app = new Vue({
+            data: {
+                url: window.document.location.pathname
+            },
+            render(h) {
+                return h('p', {}, ['The visited URL is: '+ this.url]);
+            }
+        })
+        app.$mount('#demo');
+      </script>
+</html>

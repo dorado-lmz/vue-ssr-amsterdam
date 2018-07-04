@@ -8,11 +8,14 @@ module.exports = async (req, res) => {
 		data: {
 			url: req.url
 		},
-		template: `<p>The visited URL is: {{ url }}</p>`
+		render(h) {
+			return h('p', {}, ['The visited URL is: '+ this.url]);
+		}
 	})
-	
+
 	try {
 		const html = await renderer.renderToString(app)
+		// app.$mount('#el');
 
 		res.send(html)
 	} catch (err) {

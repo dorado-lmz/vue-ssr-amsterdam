@@ -1,5 +1,7 @@
 const Vue = require('vue')
-const renderer = require('vue-server-renderer').createRenderer()
+const renderer = require('vue-server-renderer').createRenderer({
+  template: require('fs').readFileSync('./index.template.html', 'utf-8')
+})
 
 module.exports = async (req, res) => {
 	const app = new Vue({
@@ -10,15 +12,9 @@ module.exports = async (req, res) => {
 	})
 	
 	try {
-		const appHtml = await renderer.renderToString(app)
+		const html = await renderer.renderToString(app)
 
-		res.send(`
-			<!DOCTYPE html>
-			<html lang="en">
-				<head><title>Hello</title></head>
-				<body>${appHtml}</body>
-			</html>`
-		)
+		res.send(html)
 	} catch (err) {
 		res.status(500).end(err.message)
 	}

@@ -1,7 +1,10 @@
-const server = require('express')()
+const express = require('express')
+const server = express()
+const path = require('path')
 const renderVueApp = require('./render-vue-app')
 
-server.get('*', renderVueApp)
+server.use('/abc', express.static(path.join(__dirname, '/static')));
+server.get('/', renderVueApp)
 
 server.listen(3000)
 console.log('Server listening on http://localhost:3000')
